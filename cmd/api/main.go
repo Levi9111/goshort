@@ -15,12 +15,12 @@ func main() {
 		fmt.Fprintln(w, "Welcome to GoShort Api")
 	})
 
-	fmt.Println("The server is starting on Port 8000")
+	fmt.Println("The server is starting on Port 8080")
 
 	// http.ListenAndServe is analogous to app.listen(8080)
 	// In Go, functions often return an 'error' type as their last return value.
 	// We handle errors explicitly instead of relying on try/catch blocks.
-	err := http.ListenAndServe(":8000", nil)
+	err := http.ListenAndServe(":8080", nil)
 
 	if err != nil {
 		fmt.Printf("Server failed: %v",err)
