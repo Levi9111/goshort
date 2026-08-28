@@ -12,7 +12,7 @@ func main() {
 	// 2. r *http.Request: A pointer to the incoming request object (like 'req').
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request){
-		fmt.Println(w, "Welcome to GoShort Api")
+		fmt.Fprintln(w, "Welcome to GoShort Api")
 	})
 
 	fmt.Println("The server is starting on Port 8000")
