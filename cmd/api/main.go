@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	// Replace 'github.com/yourusername/goshort' with whatever you put in go.mod
 	"github.com/levi9111/goshort/internal/config"
+	"github.com/levi9111/goshort/internal/database"
 )
 
 func main() {
@@ -15,6 +15,13 @@ func main() {
 		log.Fatalf("Failed to load config: %v", err)
 	}
 
+	// Connect to MogoDB
+	mongoClient, err := database.ConnectMongo(cfg.MongoURI)
+	if err !=nil {
+		log.Fatalf("Failed to connect to MongoDB: %v",err)
+		log.Println(mongoClient)
+	}
+
 	// Let's print out a value to prove it loaded from .env
-	fmt.Printf("Config loaded successfully! Mongo URI is: %s\n", cfg.MongoURI)
+	fmt.Printf("Config loaded successfully! Mongo URI is: %s\n", cfg.Port)
 }
