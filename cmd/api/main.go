@@ -2,27 +2,19 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"log"
+
+	// Replace 'github.com/yourusername/goshort' with whatever you put in go.mod
+	"github.com/levi9111/goshort/internal/config"
 )
 
 func main() {
-	// http.HandleFunc is analogous to Express's app.get('/', (req, res) => ...)
-	// Notice we pass a function with two parameters:
-	// 1. w http.ResponseWriter: The object we use to write data back to the client (like 'res').
-	// 2. r *http.Request: A pointer to the incoming request object (like 'req').
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request){
-		fmt.Fprintln(w, "Welcome to GoShort Api")
-	})
-
-	fmt.Println("The server is starting on Port 8080")
-
-	// http.ListenAndServe is analogous to app.listen(8080)
-	// In Go, functions often return an 'error' type as their last return value.
-	// We handle errors explicitly instead of relying on try/catch blocks.
-	err := http.ListenAndServe(":8080", nil)
-
+	// Initialize our config
+	cfg, err := config.LoadConfig()
 	if err != nil {
-		fmt.Printf("Server failed: %v",err)
+		log.Fatalf("Failed to load config: %v", err)
 	}
+
+	// Let's print out a value to prove it loaded from .env
+	fmt.Printf("Config loaded successfully! Mongo URI is: %s\n", cfg.MongoURI)
 }
